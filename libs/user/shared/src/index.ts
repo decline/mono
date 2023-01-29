@@ -1,1 +1,1 @@
-export * from './lib/user-shared.module';
+export { User } from './lib/user';
