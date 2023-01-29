@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { AuthFacade, queryParamRedirectToAfterLogin } from '@nesty/auth/data-access';
+import { AuthFacade, queryParamRedirectToAfterLogin } from '@mono/auth/data-access';
 
 @Component({
-  selector: 'nesty-auth-login',
+  selector: 'mono-auth-login',
   templateUrl: './auth-login.component.html',
   styleUrls: ['./auth-login.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

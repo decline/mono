@@ -47,6 +47,12 @@
     },
     "serve": {
       "executor": "@angular-devkit/build-angular:dev-server",
+      "options": {
+        "proxyConfig": "apps/app/proxy.conf.json",
+        "port": 4200,
+        "host": "0.0.0.0",
+        "disableHostCheck": true
+      },
       "configurations": {
         "production": {
           "browserTarget": "app:build:production"
@@ -85,5 +91,5 @@
       }
     }
   },
-  "tags": []
+  "tags": ["scope:app"]
 }
