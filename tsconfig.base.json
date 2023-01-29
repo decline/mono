@@ -14,7 +14,17 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@mono/auth/api": ["libs/auth/api/src/index.ts"],
+      "@mono/auth/data-access": ["libs/auth/data-access/src/index.ts"],
+      "@mono/auth/feature": ["libs/auth/feature/src/index.ts"],
+      "@mono/auth/shared": ["libs/auth/shared/src/index.ts"],
+      "@mono/common/api": ["libs/common/api/src/index.ts"],
+      "@mono/common/data-access": ["libs/common/data-access/src/index.ts"],
+      "@mono/common/shared": ["libs/common/shared/src/index.ts"],
+      "@mono/user/api": ["libs/user/api/src/index.ts"],
+      "@mono/user/shared": ["libs/user/shared/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
