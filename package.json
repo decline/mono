@@ -2,7 +2,12 @@
   "name": "mono",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "ci:lint": "nx affected:lint --all",
+    "ci:test": "nx affected:test --all",
+    "ci:build": "nx affected:build --all",
+    "typeorm": "ts-node --transpile-only --project tsconfig.base.json --compiler-options \"{\\\"module\\\": \\\"commonjs\\\"}\" ./node_modules/typeorm/cli.js"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "~15.1.0",
@@ -32,6 +37,7 @@
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.1",
     "passport-local": "^1.0.0",
+    "pg": "^8.9.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
@@ -60,6 +66,7 @@
     "@nrwl/workspace": "15.6.3",
     "@types/jest": "28.1.1",
     "@types/node": "18.7.1",
+    "@types/passport-jwt": "^3.0.8",
     "@types/passport-local": "^1.0.35",
     "@typescript-eslint/eslint-plugin": "^5.36.1",
     "@typescript-eslint/parser": "^5.36.1",

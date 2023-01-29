@@ -1,0 +1,19 @@
+# Cache, VCS and IDE and system files
+.angular
+.git
+.idea
+.pnpm-store
+.vscode
+.DS_Store
+Thumbs.db
+npm-debug.log
+
+# compiled output
+dist
+
+# dependencies
+node_modules
+
+# misc
+coverage
+documentation

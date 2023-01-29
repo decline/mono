@@ -1,0 +1,74 @@
+version: '3.8'
+
+services:
+  app:
+    container_name: app
+    hostname: app
+    build:
+      dockerfile: Dockerfile
+      context: .
+      target: app-development
+      args:
+        NPM_TOKEN: ${NPM_TOKEN}
+    volumes:
+      - ./:/app:delegated
+      - /tmp/nx:/tmp/nx:delegated
+      - node-modules:/app/node_modules
+      - npm-cache:/home/node/.npm
+      - pnpm-store:/home/node/.local/share/pnpm/store
+    command: nx run app:serve
+    environment:
+      NPM_TOKEN: '${NPM_TOKEN?err}'
+    ports:
+      - '4200:4200'
+  # @TODO implement health check
+  #    depends_on:
+  #      app-api:
+  #        condition: service_healthy
+
+  api:
+    container_name: api
+    hostname: api
+    build:
+      dockerfile: Dockerfile
+      context: .
+      target: api-development
+      args:
+        NPM_TOKEN: ${NPM_TOKEN}
+    entrypoint: ./docker/entrypoint.sh
+    volumes:
+      - ./:/app:delegated
+      - /tmp/nx:/tmp/nx:delegated
+      - node-modules:/app/node_modules
+      - npm-cache:/home/node/.npm
+      - pnpm-store:/home/node/.local/share/pnpm/store
+    command: nx run api:serve
+    environment:
+      NODE_ENV: development
+      PORT: 3333
+      NPM_TOKEN: '${NPM_TOKEN?err}'
+      DATABASE_URL: postgres://user:password@app-db:5432/app
+    ports:
+      - '3333:3333'
+      - '9229:9229'
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    container_name: db
+    hostname: db
+    image: postgres:14.5
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: app
+    ports:
+      - '5432:5432'
+    healthcheck:
+      test: pg_isready -U user -d app -h 127.0.0.1
+
+volumes:
+  node-modules:
+  npm-cache:
+  pnpm-store:
