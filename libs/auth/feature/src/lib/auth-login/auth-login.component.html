@@ -1,0 +1,23 @@
+<div class="p-8 text-center">
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <div class="block">
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" type="text" />
+        <mat-error *ngIf="formGroup.get('name')?.hasError('required')"> Please enter your name </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="block">
+      <mat-form-field class="block">
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="password" type="password" />
+        <mat-error *ngIf="formGroup.get('password')?.hasError('required')"> Please enter your password </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="block">
+      <button mat-button class="block" type="submit" [disabled]="formGroup.invalid">Login</button>
+    </div>
+  </form>
+</div>

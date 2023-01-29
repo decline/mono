@@ -1,1 +1,1 @@
-export * from './lib/auth-api.module';
+export { AuthApiModule } from './lib/auth-api.module';

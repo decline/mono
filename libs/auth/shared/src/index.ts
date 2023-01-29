@@ -1,1 +1,1 @@
-export * from './lib/auth-shared.module';
+export { JwtPayload, JwtLoginResponse } from './lib/jwt';
