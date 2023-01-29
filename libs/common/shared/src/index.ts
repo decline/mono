@@ -1,1 +1,1 @@
-export * from './lib/common-shared.module';
+export { Error } from './lib/error';

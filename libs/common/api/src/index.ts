@@ -1,1 +1,1 @@
-export * from './lib/common-api.module';
+export { CommonApiModule } from './lib/common-api.module';
