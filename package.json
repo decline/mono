@@ -5,8 +5,7 @@
   "scripts": {
     "ci:lint": "nx affected:lint --all",
     "ci:test": "nx affected:test --all",
-    "ci:build": "nx affected:build --all",
-    "typeorm": "ts-node --transpile-only --project tsconfig.base.json --compiler-options \"{\\\"module\\\": \\\"commonjs\\\"}\" ./node_modules/typeorm/cli.js"
+    "ci:build": "nx affected:build --all"
   },
   "private": true,
   "dependencies": {
@@ -20,13 +19,16 @@
     "@angular/platform-browser": "~15.1.0",
     "@angular/platform-browser-dynamic": "~15.1.0",
     "@angular/router": "~15.1.0",
+    "@mikro-orm/core": "^5.6.8",
+    "@mikro-orm/migrations": "^5.6.8",
+    "@mikro-orm/nestjs": "^5.1.6",
+    "@mikro-orm/postgresql": "^5.6.8",
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
     "@nestjs/jwt": "^10.0.1",
     "@nestjs/mapped-types": "^1.2.0",
     "@nestjs/passport": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
-    "@nestjs/typeorm": "^9.0.1",
     "@ngrx/component-store": "~15.0.0",
     "@ngrx/effects": "~15.0.0",
     "@ngrx/entity": "~15.0.0",
@@ -41,7 +43,6 @@
     "reflect-metadata": "^0.1.13",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
-    "typeorm": "^0.3.11",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
@@ -52,6 +53,7 @@
     "@angular/cli": "~15.1.0",
     "@angular/compiler-cli": "~15.1.0",
     "@angular/language-service": "~15.1.0",
+    "@mikro-orm/cli": "^5.6.8",
     "@nestjs/schematics": "^9.0.0",
     "@nestjs/testing": "^9.0.0",
     "@ngrx/schematics": "~15.0.0",

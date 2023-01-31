@@ -1,17 +1,23 @@
-import { Connection, EntitySubscriberInterface, EventSubscriber, InsertEvent } from 'typeorm';
+import { EntityManager, EntityName, EventArgs, EventSubscriber, Subscriber } from "@mikro-orm/core";
+import { Injectable } from "@nestjs/common";
 import { UserEntity } from '../entities/user.entity';
 
-@EventSubscriber()
-export class UserSubscriber implements EntitySubscriberInterface<UserEntity> {
-  constructor(connection: Connection) {
-    connection.subscribers.push(this);
+@Injectable()
+export class UserSubscriber implements EventSubscriber<UserEntity> {
+
+  constructor(em: EntityManager) {
+    em.getEventManager().registerSubscriber(this);
   }
 
-  listenTo() {
-    return UserEntity;
+  getSubscribedEntities(): EntityName<UserEntity>[] {
+    return [UserEntity];
   }
 
-  beforeInsert(event: InsertEvent<UserEntity>) {
-    console.log(`BEFORE USER INSERTED: `, event.entity);
+  async afterCreate(args: EventArgs<UserEntity>): Promise<void> {
+    console.log(`AFTER USER CREATE: `, args);
+  }
+
+  async afterUpdate(args: EventArgs<UserEntity>): Promise<void> {
+    console.log(`AFTER USER UPDATE: `, args);
   }
 }

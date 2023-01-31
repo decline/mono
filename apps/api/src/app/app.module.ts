@@ -1,28 +1,25 @@
+import { MikroORM } from '@mikro-orm/core';
+import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { AuthApiModule } from '@mono/auth/api';
 import { CommonApiModule } from '@mono/common/api';
 import { UserApiModule } from '@mono/user/api';
-import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { getConnectionOptions } from 'typeorm';
-
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { Module, OnModuleInit } from '@nestjs/common';
+import mikroOrmConfig from '../mikro-orm.config';
 
 @Module({
   imports: [
-    TypeOrmModule.forRootAsync({
-      useFactory: async () => ({
-        ...(await getConnectionOptions()),
-        entities: [],
-        migrations: [],
-        autoLoadEntities: true,
-      }),
-    }),
+    MikroOrmModule.forRoot(mikroOrmConfig),
     AuthApiModule,
     CommonApiModule,
     UserApiModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
-export class AppModule {}
+export class AppModule implements OnModuleInit {
+  constructor(private readonly orm: MikroORM) {}
+
+  async onModuleInit(): Promise<void> {
+    await this.orm.getMigrator().up();
+  }
+}

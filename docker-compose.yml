@@ -47,7 +47,10 @@ services:
       NODE_ENV: development
       PORT: 3333
       NPM_TOKEN: '${NPM_TOKEN?err}'
-      DATABASE_URL: postgres://user:password@app-db:5432/app
+      DATABASE_URL: postgres://user:password@db:5432/app
+      MIKRO_ORM_CLI: /app/apps/api/src/mikro-orm.config.ts
+      MIKRO_ORM_CLI_USE_TS_NODE: true
+      MIKRO_ORM_CLI_TS_CONFIG_PATH: /app/apps/api
     ports:
       - '3333:3333'
       - '9229:9229'

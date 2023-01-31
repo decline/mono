@@ -1,24 +1,24 @@
+import { Entity, PrimaryKey, Property } from "@mikro-orm/core";
 import { User } from '@mono/user/shared';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity({ name: 'user' })
+@Entity({ tableName: 'user' })
 export class UserEntity implements User<string | undefined> {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryKey() // @TODO should be uuid
   id: string | undefined;
 
-  @Column()
+  @Property()
   userName: string;
 
-  @Column()
+  @Property()
   password: string;
 
-  @Column()
+  @Property()
   firstName: string;
 
-  @Column()
+  @Property()
   lastName: string;
 
-  @Column({ default: true })
+  @Property({ default: true })
   isActive: boolean;
 
   constructor(userName: string, password: string, firstName: string, lastName: string, isActive = true) {
