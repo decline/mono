@@ -1,6 +1,6 @@
 import { Migrator } from '@mikro-orm/migrations';
 import { defineConfig } from '@mikro-orm/postgresql';
-import { UserEntity } from "@mono/user/api";
+import { UserEntity } from '@mono/user/api';
 
 export default defineConfig({
   entities: [UserEntity],
@@ -8,6 +8,6 @@ export default defineConfig({
   extensions: [Migrator],
   migrations: {
     path: `${__dirname}/migrations`,
-    emit: 'js'
-  }
+    emit: 'js',
+  },
 });

@@ -24,7 +24,7 @@ export const initialState: State = {
 
 const authReducer = createReducer(
   initialState,
-  on(AuthActions.login, (state) => ({ ...state, authenticating: true })),
+  on(AuthActions.login, state => ({ ...state, authenticating: true })),
   on(AuthActions.loginSuccess, (state, { jwt }) => ({
     ...state,
     authenticated: true,
@@ -32,11 +32,27 @@ const authReducer = createReducer(
     jwt,
     error: null,
   })),
-  on(AuthActions.loginFailure, (state, { error }) => ({ ...state, authenticating: false, error })),
+  on(AuthActions.loginFailure, (state, { error }) => ({
+    ...state,
+    authenticating: false,
+    error,
+  })),
   on(AuthActions.info, (state, { jwt }) => ({ ...state, jwt })),
-  on(AuthActions.infoSuccess, (state, { user }) => ({ ...state, authenticated: true, user, error: null })),
-  on(AuthActions.infoFailure, (state, { error }) => ({ ...state, authenticated: false, error })),
-  on(AuthActions.revokeAuthentication, (state) => ({ ...state, authenticated: false }))
+  on(AuthActions.infoSuccess, (state, { user }) => ({
+    ...state,
+    authenticated: true,
+    user,
+    error: null,
+  })),
+  on(AuthActions.infoFailure, (state, { error }) => ({
+    ...state,
+    authenticated: false,
+    error,
+  })),
+  on(AuthActions.revokeAuthentication, state => ({
+    ...state,
+    authenticated: false,
+  }))
 );
 
 export function reducer(state: State | undefined, action: Action) {

@@ -1,6 +1,6 @@
-import { Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
 import { JwtLoginResponse } from '@mono/auth/shared';
 import { User } from '@mono/user/shared';
+import { Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
 // import { Request } from 'express';
 import { Public } from '../constants';
 import { AuthService } from '../services/auth.service';
@@ -8,7 +8,7 @@ import { LocalGuard } from '../services/local.guard';
 
 // currently just used for not installing "express" peer dependency via pnpm
 interface Request {
-  user: User
+  user: User;
 }
 
 @Controller('auth')

@@ -1,10 +1,9 @@
-import { EntityManager, EntityName, EventArgs, EventSubscriber, Subscriber } from "@mikro-orm/core";
-import { Injectable } from "@nestjs/common";
+import { EntityManager, EntityName, EventArgs, EventSubscriber } from '@mikro-orm/core';
+import { Injectable } from '@nestjs/common';
 import { UserEntity } from '../entities/user.entity';
 
 @Injectable()
 export class UserSubscriber implements EventSubscriber<UserEntity> {
-
   constructor(em: EntityManager) {
     em.getEventManager().registerSubscriber(this);
   }

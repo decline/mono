@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { EffectsModule } from '@ngrx/effects';
-import { StoreModule, Store } from '@ngrx/store';
+import { Store, StoreModule } from '@ngrx/store';
 import { NxModule } from '@nrwl/angular';
 import { readFirst } from '@nrwl/angular/testing';
 
@@ -9,8 +9,7 @@ import * as AuthActions from './auth.actions';
 import { AuthEffects } from './auth.effects';
 import { AuthFacade } from './auth.facade';
 import { AuthEntity } from './auth.models';
-import { AUTH_FEATURE_KEY, State, initialState, reducer } from './auth.reducer';
-import * as AuthSelectors from './auth.selectors';
+import { AUTH_FEATURE_KEY, reducer, State } from './auth.reducer';
 
 interface TestSchema {
   auth: State;

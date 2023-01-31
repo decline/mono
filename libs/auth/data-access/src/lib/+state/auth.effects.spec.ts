@@ -26,7 +26,9 @@ describe('AuthEffects', () => {
     it('should work', () => {
       actions = hot('-a-|', { a: AuthActions.init() });
 
-      const expected = hot('-a-|', { a: AuthActions.loadAuthSuccess({ auth: [] }) });
+      const expected = hot('-a-|', {
+        a: AuthActions.loadAuthSuccess({ auth: [] }),
+      });
 
       expect(effects.init$).toBeObservable(expected);
     });

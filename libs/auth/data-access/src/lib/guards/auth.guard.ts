@@ -23,8 +23,8 @@ export class AuthGuard implements CanActivate {
     this.authFacade.checkAuthentication();
 
     return this.authFacade.authenticated$.pipe(
-      filter((authenticated) => authenticated !== null && authenticated !== undefined),
-      map((authenticated) =>
+      filter(authenticated => authenticated !== null && authenticated !== undefined),
+      map(authenticated =>
         authenticated
           ? true
           : this.router.createUrlTree([this.authRootPath, 'login'], {

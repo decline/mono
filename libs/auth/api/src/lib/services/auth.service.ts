@@ -1,8 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
 import { JwtLoginResponse, JwtPayload } from '@mono/auth/shared';
 import { UserEntity, UserService } from '@mono/user/api';
 import { User } from '@mono/user/shared';
+import { Injectable } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {

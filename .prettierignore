@@ -1,4 +1,9 @@
 # Add files here to ignore them from prettier formatting
 
+/.angular
+
 /dist
 /coverage
+
+# auto-generated files
+/pnpm-lock.yaml

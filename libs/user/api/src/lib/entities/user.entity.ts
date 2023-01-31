@@ -1,4 +1,4 @@
-import { Entity, PrimaryKey, Property } from "@mikro-orm/core";
+import { Entity, PrimaryKey, Property } from '@mikro-orm/core';
 import { User } from '@mono/user/shared';
 
 @Entity({ tableName: 'user' })

@@ -7,12 +7,7 @@ import { Module, OnModuleInit } from '@nestjs/common';
 import mikroOrmConfig from '../mikro-orm.config';
 
 @Module({
-  imports: [
-    MikroOrmModule.forRoot(mikroOrmConfig),
-    AuthApiModule,
-    CommonApiModule,
-    UserApiModule,
-  ],
+  imports: [MikroOrmModule.forRoot(mikroOrmConfig), AuthApiModule, CommonApiModule, UserApiModule],
   controllers: [],
   providers: [],
 })

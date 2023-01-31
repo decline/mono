@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthDataAccessModule } from '@mono/auth/data-access';
-import { LocalStorageService, CommonDataAccessModule } from '@mono/common/data-access';
+import { CommonDataAccessModule, LocalStorageService } from '@mono/common/data-access';
 import { environment } from '../environments/environment';
 import { AppRoutingModule, authRootPath } from './app-routing.module';
 import { AppComponent } from './app.component';

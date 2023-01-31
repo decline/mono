@@ -12,10 +12,6 @@ export class UserController {
     const user = new UserEntity('decline', 'test', 'John', 'Doe');
     this.userService
       .create(user)
-      .then(() =>
-        this.userService
-          .findAll()
-          .then((users) => console.log('All users:', users))
-      );
+      .then(() => this.userService.findAll().then(users => console.log('All users:', users)));
   }
 }

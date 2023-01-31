@@ -2,7 +2,7 @@ import { Action } from '@ngrx/store';
 
 import * as AuthActions from './auth.actions';
 import { AuthEntity } from './auth.models';
-import { State, initialState, reducer } from './auth.reducer';
+import { initialState, reducer, State } from './auth.reducer';
 
 describe('Auth Reducer', () => {
   const createAuthEntity = (id: string, name = ''): AuthEntity => ({

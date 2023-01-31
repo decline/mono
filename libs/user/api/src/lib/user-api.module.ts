@@ -1,4 +1,4 @@
-import { MikroOrmModule } from "@mikro-orm/nestjs";
+import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { Module } from '@nestjs/common';
 import { UserController } from './controllers/user.controller';
 import { UserEntity } from './entities/user.entity';
@@ -11,5 +11,4 @@ import { UserSubscriber } from './subscribers/user.subscriber';
   providers: [UserService, UserSubscriber],
   exports: [UserService],
 })
-export class UserApiModule {
-}
+export class UserApiModule {}

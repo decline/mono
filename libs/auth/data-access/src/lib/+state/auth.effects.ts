@@ -17,12 +17,15 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.login),
       fetch({
-        run: (action) =>
-          this.authHttpService
-            .login(action.username, action.password)
-            .pipe(
-              map((response) => AuthActions.loginSuccess({ jwt: response.accessToken, redirectTo: action.redirectTo }))
-            ),
+        run: action =>
+          this.authHttpService.login(action.username, action.password).pipe(
+            map(response =>
+              AuthActions.loginSuccess({
+                jwt: response.accessToken,
+                redirectTo: action.redirectTo,
+              })
+            )
+          ),
         onError: (_action, error: Error) => {
           console.error('Error', error);
           return AuthActions.loginFailure({ error });
@@ -35,7 +38,7 @@ export class AuthEffects {
     () =>
       this.actions$.pipe(
         ofType(AuthActions.loginSuccess),
-        tap(async (action) => {
+        tap(async action => {
           // store token in storage
           this.storageService.setItem(this.tokenStorageKey, action.jwt);
 
@@ -52,11 +55,13 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.checkAuthentication),
       map(() => this.storageService.getItem(this.tokenStorageKey)),
-      map((jwt) => {
+      map(jwt => {
         if (jwt) {
           return AuthActions.info({ jwt });
         }
-        return AuthActions.infoFailure({ error: { message: 'No token found in storage' } });
+        return AuthActions.infoFailure({
+          error: { message: 'No token found in storage' },
+        });
       })
     )
   );
@@ -65,7 +70,7 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.info),
       fetch({
-        run: () => this.authHttpService.info().pipe(map((user) => AuthActions.infoSuccess({ user }))),
+        run: () => this.authHttpService.info().pipe(map(user => AuthActions.infoSuccess({ user }))),
         onError: (_action, error: Error) => {
           console.error('Error', error);
           return AuthActions.infoFailure({ error });

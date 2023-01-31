@@ -20,7 +20,7 @@ export class AuthInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return this.authFacade.jwt$.pipe(
       take(1),
-      map((jwt) =>
+      map(jwt =>
         jwt
           ? request.clone({
               headers: request.headers.set('Authorization', `Bearer ${jwt}`),
@@ -29,7 +29,7 @@ export class AuthInterceptor implements HttpInterceptor {
       ),
       switchMap((enrichedRequest: HttpRequest<unknown>) =>
         next.handle(enrichedRequest).pipe(
-          catchError((error) => {
+          catchError(error => {
             if (
               request.context.get(HANDLE_AUTHENTICATION_FAILURE) &&
               error instanceof HttpErrorResponse &&
