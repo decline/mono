@@ -1,13 +1,20 @@
 import { Migrator } from '@mikro-orm/migrations';
 import { defineConfig } from '@mikro-orm/postgresql';
-import { UserEntity } from '@mono/user/api';
+import * as process from 'process';
+
+const libsFolder = './../../../libs';
 
 export default defineConfig({
-  entities: [UserEntity],
+  baseDir: __dirname,
+  entitiesTs: [`${libsFolder}/user/api/**/entities/*.entity.ts`],
+  discovery: {
+    warnWhenNoEntities: false, // mikro-orm would throw an error, when we don't provide the "entities" property. But we don't need it, since we only need to have "entitiesTs" through ts-node
+  },
   clientUrl: process.env['DATABASE_URL'],
+  forceUtcTimezone: true,
   extensions: [Migrator],
   migrations: {
-    path: `${__dirname}/migrations`,
-    emit: 'js',
+    path: `./migrations`,
+    pathTs: `./migrations`,
   },
 });

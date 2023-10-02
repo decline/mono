@@ -6,19 +6,16 @@ services:
     hostname: app
     build:
       dockerfile: Dockerfile
-      context: .
-      target: app-development
-      args:
-        NPM_TOKEN: ${NPM_TOKEN}
+      target: development
+    entrypoint: ./docker/entrypoint.sh
     volumes:
       - ./:/app:delegated
-      - /tmp/nx:/tmp/nx:delegated
       - node-modules:/app/node_modules
-      - npm-cache:/home/node/.npm
-      - pnpm-store:/home/node/.local/share/pnpm/store
+      - nx-cache:/tmp/nx
+      - jest-cache:/tmp/jest
+      - cypress-cache:/tmp/cypress
+      - pnpm-store:/root/.local/share/pnpm/store
     command: nx run app:serve
-    environment:
-      NPM_TOKEN: '${NPM_TOKEN?err}'
     ports:
       - '4200:4200'
   # @TODO implement health check
@@ -31,17 +28,15 @@ services:
     hostname: api
     build:
       dockerfile: Dockerfile
-      context: .
-      target: api-development
-      args:
-        NPM_TOKEN: ${NPM_TOKEN}
+      target: development
     entrypoint: ./docker/entrypoint.sh
     volumes:
       - ./:/app:delegated
-      - /tmp/nx:/tmp/nx:delegated
       - node-modules:/app/node_modules
-      - npm-cache:/home/node/.npm
-      - pnpm-store:/home/node/.local/share/pnpm/store
+      - nx-cache:/tmp/nx
+      - jest-cache:/tmp/jest
+      - cypress-cache:/tmp/cypress
+      - pnpm-store:/root/.local/share/pnpm/store
     command: nx run api:serve
     environment:
       NODE_ENV: development
@@ -73,5 +68,7 @@ services:
 
 volumes:
   node-modules:
-  npm-cache:
+  nx-cache:
+  jest-cache:
+  cypress-cache:
   pnpm-store:

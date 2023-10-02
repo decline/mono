@@ -7,30 +7,47 @@
     "build": {
       "executor": "@nx/webpack:webpack",
       "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
       "options": {
         "target": "node",
         "compiler": "tsc",
         "outputPath": "dist/apps/api",
         "main": "apps/api/src/main.ts",
         "tsConfig": "apps/api/tsconfig.app.json",
-        "assets": ["apps/api/src/assets", "apps/api/src/migrations"],
+        "assets": ["apps/api/src/assets"],
+        "generatePackageJson": true,
         "webpackConfig": "apps/api/webpack.config.js",
-        "babelUpwardRootMode": true
+        "babelUpwardRootMode": true,
+        "transformers": [
+          {
+            "name": "@nestjs/swagger/plugin",
+            "options": {
+              "classValidatorShim": false,
+              "introspectComments": true
+            }
+          }
+        ]
       },
       "configurations": {
         "production": {
           "optimization": true,
           "extractLicenses": true,
-          "inspect": false
+          "inspect": false,
+          "sourceMap": "hidden"
         }
       }
     },
     "serve": {
-      "executor": "@nrwl/js:node",
+      "dependsOn": ["run-migrations"],
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
       "options": {
         "buildTarget": "api:build"
       },
       "configurations": {
+        "development": {
+          "buildTarget": "api:build:development"
+        },
         "production": {
           "buildTarget": "api:build:production"
         }
@@ -55,6 +72,21 @@
           "ci": true,
           "codeCoverage": true
         }
+      }
+    },
+    "build-migrations": {
+      "executor": "nx:run-commands",
+      "inputs": ["{workspaceRoot}/apps/api/src/migrations"],
+      "outputs": ["{workspaceRoot}/dist/apps/api/migrations"],
+      "options": {
+        "cwd": "apps/api",
+        "command": "tsc -p tsconfig.migrations.json"
+      }
+    },
+    "run-migrations": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "mikro-orm migration:up"
       }
     }
   },

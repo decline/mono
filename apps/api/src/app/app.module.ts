@@ -4,10 +4,17 @@ import { AuthApiModule } from '@mono/auth/api';
 import { CommonApiModule } from '@mono/common/api';
 import { UserApiModule } from '@mono/user/api';
 import { Module, OnModuleInit } from '@nestjs/common';
-import mikroOrmConfig from '../mikro-orm.config';
+import MikroOrmConfig from '../mikro-orm.config';
 
 @Module({
-  imports: [MikroOrmModule.forRoot(mikroOrmConfig), AuthApiModule, CommonApiModule, UserApiModule],
+  imports: [
+    AuthApiModule,
+    CommonApiModule,
+    MikroOrmModule.forRootAsync({
+      useFactory: () => ({ ...MikroOrmConfig, autoLoadEntities: true }),
+    }),
+    UserApiModule,
+  ],
   controllers: [],
   providers: [],
 })
