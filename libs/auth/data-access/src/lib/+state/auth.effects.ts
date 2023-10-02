@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { StorageService } from '@mono/common/data-access';
 import { Error } from '@mono/common/shared';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { fetch } from '@nrwl/angular';
+import { fetch } from '@ngrx/router-store/data-persistence';
 import { map, tap } from 'rxjs';
 import { AuthHttpService } from '../services/auth-http.service';
 
