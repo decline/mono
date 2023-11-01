@@ -7,3 +7,5 @@
 
 # auto-generated files
 /pnpm-lock.yaml
+
+.angular
