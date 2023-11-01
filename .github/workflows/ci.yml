@@ -33,4 +33,6 @@ jobs:
     name: Nx Cloud - Agents
     uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.13.1
     with:
+      working-directory: .
+      pnpm-version: 8.10.0
       number-of-agents: 3
