@@ -23,7 +23,7 @@ jobs:
         CYPRESS_CACHE_FOLDER=node_modules/.cache
       install-commands: |
         pnpm install --frozen-lockfile
-        {{ github.workspace }}/node_modules/.bin/cypress install
+        ${{ github.workspace }}/node_modules/.bin/cypress install
       number-of-agents: 3
       init-commands: |
         pnpm exec nx-cloud start-ci-run --stop-agents-after="build" --agent-count=3
@@ -45,5 +45,5 @@ jobs:
         CYPRESS_CACHE_FOLDER=node_modules/.cache
       install-commands: |
         pnpm install --frozen-lockfile
-        {{ github.workspace }}/node_modules/.bin/cypress install
+        ${{ github.workspace }}/node_modules/.bin/cypress install
       number-of-agents: 3
