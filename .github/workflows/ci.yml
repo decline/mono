@@ -19,6 +19,8 @@ jobs:
       main-branch-name: main
       working-directory: .
       pnpm-version: 8.10.0
+      environment-variables: |
+        CYPRESS_CACHE_FOLDER={{ github.workspace }}/node_modules/.cache
       number-of-agents: 3
       init-commands: |
         pnpm exec nx-cloud start-ci-run --stop-agents-after="build" --agent-count=3
@@ -36,4 +38,6 @@ jobs:
     with:
       working-directory: .
       pnpm-version: 8.10.0
+      environment-variables: |
+        CYPRESS_CACHE_FOLDER={{ github.workspace }}/node_modules/.cache
       number-of-agents: 3
