@@ -29,8 +29,7 @@ jobs:
         pnpm exec nx run-many --target=lint --parallel=3
         pnpm exec nx run-many --target=e2e --parallel=3
         pnpm exec nx run-many --target=build --parallel=3
-#        pnpm exec nx run-many --target=test --parallel=3 --ci --code-coverage
-
+  #        pnpm exec nx run-many --target=test --parallel=3 --ci --code-coverage
   agents:
     name: Nx Cloud - Agents
     uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.13.1
