@@ -39,5 +39,5 @@ jobs:
       working-directory: .
       pnpm-version: 8.10.0
       environment-variables: |
-        CYPRESS_CACHE_FOLDER={{ github.workspace }}/node_modules/.cache
+        CYPRESS_CACHE_FOLDER=node_modules/.cache
       number-of-agents: 3
