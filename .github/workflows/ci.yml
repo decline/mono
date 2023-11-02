@@ -20,10 +20,11 @@ jobs:
       working-directory: .
       pnpm-version: 8.10.0
       environment-variables: |
-        CYPRESS_CACHE_FOLDER=node_modules/.cache
+        CYPRESS_CACHE_FOLDER=$GITHUB_WORKSPACE/node_modules/.cache
       install-commands: |
+        echo "$GITHUB_WORKSPACE/node_modules/.bin" >> $GITHUB_PATH
         pnpm install --frozen-lockfile
-        ./node_modules/.bin/cypress install
+        cypress install
       number-of-agents: 3
       init-commands: |
         pnpm exec nx-cloud start-ci-run --stop-agents-after="build" --agent-count=3
@@ -42,8 +43,9 @@ jobs:
       working-directory: .
       pnpm-version: 8.10.0
       environment-variables: |
-        CYPRESS_CACHE_FOLDER=node_modules/.cache
+        CYPRESS_CACHE_FOLDER=$GITHUB_WORKSPACE/node_modules/.cache
       install-commands: |
+        echo "$GITHUB_WORKSPACE/node_modules/.bin" >> $GITHUB_PATH
         pnpm install --frozen-lockfile
-        ./node_modules/.bin/cypress install
+        cypress install
       number-of-agents: 3
